@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şifre Güç Ölçer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 50px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input {
+            width: calc(100% - 60px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .weak {
+            color: red;
+        }
+
+        .medium {
+            color: orange;
+        }
+
+        .strong {
+            color: green;
+        }
+
+        .super-strong {
+            color: blue;
+        }
+
+        .char-count {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            right: 0;
+            height: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0 10px;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .password-features {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .password-features span {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .feature-check {
+            color: green;
+        }
+
+        .feature-cross {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Güçlü Şifre Asistanı</div>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="sifre-guclu-olcer.html">Şifre Güç Ölçer</a>
+            <a href="sifre-olusturucu.html">Şifre Oluşturucu</a>
+            <a href="guvenlik-raporu.html">Güvenlik Raporu</a>
+            <a href="hakkinda.html">Hakkında</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Şifre Güç Ölçer</h1>
+        <p>Şifrenizi girin ve güvenlik seviyesini kontrol edin.</p>
+        <form>
+            <label for="password">Şifre:</label>
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Şifrenizi buraya yazın" oninput="updateStrength(); updateCharCount(); checkPasswordFeatures();">
+                <button type="button" class="toggle-btn" onclick="togglePasswordVisibility()">Göster</button>
+            </div>
+            <span class="char-count" id="char-count">0 karakter</span>
+            <button type="button" class="btn" onclick="checkPasswordStrength()">Ölç</button>
+        </form>
+        <div class="password-features" id="password-features">
+            <div><span id="uppercase" class="feature-cross">&#10008;</span> Büyük Harfler Dahil Mi? (A-Z)</div>
+            <div><span id="lowercase" class="feature-cross">&#10008;</span> Küçük Harfler Dahil Mi? (a-z)</div>
+            <div><span id="numbers" class="feature-cross">&#10008;</span> Rakam Var Mı? (0-9)</div>
+            <div><span id="symbols" class="feature-cross">&#10008;</span> Sembol Var Mı? (&%+^! vb.)</div>
+        </div>
+        <div class="result" id="result">
+            Şifre gücü burada görünecek.
+        </div>
+    </div>
+
+    <script>
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const result = document.getElementById('result');
+            const charCount = document.getElementById('char-count');
+
+            let strength = 0;
+
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+            if (strength <= 2) {
+                result.textContent = 'Zayıf Şifre';
+                result.className = 'result weak';
+            } else if (strength === 3) {
+                result.textContent = 'Orta Güçte Şifre';
+                result.className = 'result medium';
+            } else if (strength === 4) {
+                result.textContent = 'Güçlü Şifre';
+                result.className = 'result strong';
+            } else {
+                result.textContent = 'Süper Güçlü Şifre';
+                result.className = 'result super-strong';
+            }
+
+            // Şifre uzunluğunu güncelle
+            charCount.textContent = `${password.length} karakter`;
+            checkPasswordFeatures();
+        }
+
+        function updateCharCount() {
+            const password = document.getElementById('password').value;
+            const charCount = document.getElementById('char-count');
+            charCount.textContent = `${password.length} karakter`;
+        }
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const button = document.querySelector('.toggle-btn');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                button.textContent = 'Gizle';
+            } else {
+                passwordInput.type = 'password';
+                button.textContent = 'Göster';
+            }
+        }
+
+        function checkPasswordFeatures() {
+            const password = document.getElementById('password').value;
+
+            const uppercase = document.getElementById('uppercase');
+            const lowercase = document.getElementById('lowercase');
+            const numbers = document.getElementById('numbers');
+            const symbols = document.getElementById('symbols');
+
+            if (/[A-Z]/.test(password)) {
+                uppercase.innerHTML = '&#10004;';
+                uppercase.className = 'feature-check';
+            } else {
+                uppercase.innerHTML = '&#10008;';
+                uppercase.className = 'feature-cross';
+            }
+
+            if (/[a-z]/.test(password)) {
+                lowercase.innerHTML = '&#10004;';
+                lowercase.className = 'feature-check';
+            } else {
+                lowercase.innerHTML = '&#10008;';
+                lowercase.className = 'feature-cross';
+            }
+
+            if (/[0-9]/.test(password)) {
+                numbers.innerHTML = '&#10004;';
+                numbers.className = 'feature-check';
+            } else {
+                numbers.innerHTML = '&#10008;';
+                numbers.className = 'feature-cross';
+            }
+
+            if (/[^A-Za-z0-9]/.test(password)) {
+                symbols.innerHTML = '&#10004;';
+                symbols.className = 'feature-check';
+            } else {
+                symbols.innerHTML = '&#10008;';
+                symbols.className = 'feature-cross';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şifre Oluşturucu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 50px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        .rules, .settings, .output {
+            flex: 1;
+        }
+
+        .rules {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .rules div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .rules div span {
+            margin-left: 10px;
+            font-size: 16px;
+        }
+
+        .settings {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .output {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .output input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .output button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .output button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function generatePassword() {
+            const length = document.getElementById("length").value;
+            const includeLower = document.querySelectorAll("input[type=checkbox]")[0].checked;
+            const includeUpper = document.querySelectorAll("input[type=checkbox]")[1].checked;
+            const includeNumbers = document.querySelectorAll("input[type=checkbox]")[2].checked;
+            const includeSymbols = document.querySelectorAll("input[type=checkbox]")[3].checked;
+
+            let charset = "";
+            if (includeLower) charset += "abcdefghijklmnopqrstuvwxyz";
+            if (includeUpper) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (includeNumbers) charset += "0123456789";
+            if (includeSymbols) charset += "!@#$%^&*()_+";
+
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+
+            document.getElementById("password").value = password;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Güçlü Şifre Asistanı</div>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="sifre-guclu-olcer.html">Şifre Güç Ölçer</a>
+            <a href="sifre-olusturucu.html">Şifre Oluşturucu</a>
+            <a href="guvenlik-raporu.html">Güvenlik Raporu</a>
+            <a href="hakkinda.html">Hakkında</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="rules">
+            <h3>Şifre Kuralları</h3>
+            <div><span>📝</span> <span>En az 8 karakter uzunluğunda olmalıdır</span></div>
+            <div><span>Aa</span> <span>En az 4 küçük harf içermelidir</span></div>
+            <div><span>#</span> <span>En az 3 sembol içermelidir</span></div>
+            <div><span>T</span> <span>En az 3 büyük harf içermelidir</span></div>
+            <div><span>3</span> <span>En az 3 rakam içermelidir</span></div>
+            <div><span>||</span> <span>3 veya daha fazla ardışık karakter içermemelidir</span></div>
+        </div>
+
+        <div class="settings">
+            <h3>Şifre Ayarları</h3>
+            <label for="length">Uzunluk:</label>
+            <input type="range" id="length" min="6" max="64" value="16" oninput="document.getElementById('lengthValue').innerText = this.value">
+            <span id="lengthValue">16</span>
+            <br>
+            <label><input type="checkbox" checked> Küçük harfler (a-z)</label>
+            <label><input type="checkbox" checked> Büyük harfler (A-Z)</label>
+            <label><input type="checkbox" checked> Rakamlar (0-9)</label>
+            <label><input type="checkbox" checked> Semboller (!@#$%^&*)</label>
+        </div>
+
+        <div class="output">
+            <h3>Oluşturulan Şifre</h3>
+            <input type="text" id="password" readonly placeholder="Şifre burada görünecek">
+            <button onclick="generatePassword()">Şifre Oluştur</button>
+            <button onclick="navigator.clipboard.writeText(document.getElementById('password').value)">Kopyala</button>
+        </div>
+    </div>
+</body>
+</html>
