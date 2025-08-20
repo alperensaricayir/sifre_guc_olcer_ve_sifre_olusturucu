@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güçlü Şifre Asistanı</title>
+    <style>
+        /* Styles are as before, no change in CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hero .btn {
+            padding: 15px 30px;
+            background-color: white;
+            color: #007bff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .hero .btn:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .feature {
+            max-width: 300px;
+        }
+
+        .feature img {
+            max-width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 50px 20px;
+            background-color: #f1f1f1;
+        }
+
+        .testimonial {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Güçlü Şifre Asistanı</div>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="sifre-guclu-olcer.html">Şifre Güç Ölçer</a>
+            <a href="sifre-olusturucu.html">Şifre Oluşturucu</a>
+            <a href="guvenlik-raporu.html">Güvenlik Raporu</a>
+            <a href="hakkinda.html">Hakkında</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Şifre Güvenliğiniz Bizimle Güvende!</h1>
+        <p>Kullanıcı dostu araçlarımızla şifrelerinizi test edin ve özelleştirin.</p>
+        <button class="btn" onclick="navigateToPasswordStrength()">Şifre Güç Ölçer</button>
+        <button class="btn" onclick="navigateToPasswordGenerator()">Şifre Oluşturucu</button>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+        <div class="feature">
+            <img src="resimler/kisa2.png" alt="Şifre Güç Ölçer">
+            <h3>Şifre Güç Ölçer</h3>
+            <p>Mevcut şifrenizin ne kadar güçlü olduğunu test edin.</p>
+        </div>
+        <div class="feature">
+            <img src="resimler/parmakizi2.png" alt="Şifre Oluşturucu">
+            <h3>Şifre Oluşturucu</h3>
+            <p>İhtiyaçlarınıza uygun özel şifreler oluşturun.</p>
+        </div>
+        <div class="feature">
+            <img src="resimler/parmakizi5.png" alt="Güvenlik Raporu">
+            <h3>Güvenlik Raporları</h3>
+            <p>Şifrelerinizi analiz edin ve eksiklerinizi görün.</p>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials">
+        <div class="testimonial">
+            <p>"Bu araç, hesaplarımı güvence altına almama gerçekten yardımcı oldu!"</p>
+        </div>
+        <div class="testimonial">
+            <p>"Karmaşık şifreler oluşturmayı hiç bu kadar kolay bulmamıştım."</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Güçlü Şifre Asistanı. Tüm Hakları Saklıdır.</p>
+        <p>
+            <a href="gizlilik-politikasi.html">Gizlilik Politikası</a> | 
+            <a href="kullanim-sartlari.html">Kullanım Şartları</a> | 
+            <a href="iletisim.html">İletişim</a>
+        </p>
+    </footer>
+
+    <script>
+        // Butonlara işlev eklemek için JavaScript fonksiyonları
+        function navigateToPasswordStrength() {
+            // Bu fonksiyon, kullanıcıyı 'Şifre Güç Ölçer' sayfasına yönlendirecek
+            window.location.href = "sifre-guclu-olcer.html";  // 'sifre-guclu-olcer.html' dosyasına yönlendirme
+        }
+
+        function navigateToPasswordGenerator() {
+            // Bu fonksiyon, kullanıcıyı 'Şifre Oluşturucu' sayfasına yönlendirecek
+            window.location.href = "sifre-olusturucu.html";  // 'sifre-olusturucu.html' dosyasına yönlendirme
+        }
+    </script>
+</body>
+</html>
